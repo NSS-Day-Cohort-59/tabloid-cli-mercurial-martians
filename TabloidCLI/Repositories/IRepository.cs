@@ -2,7 +2,7 @@
 
 namespace TabloidCLI
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity> //this T preface makes it a generic type
     {
         List<TEntity> GetAll();
         TEntity Get(int id);

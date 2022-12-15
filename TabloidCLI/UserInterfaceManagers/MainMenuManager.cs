@@ -9,10 +9,11 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Very Pleasant Greeting!!!!!!!");
             Console.WriteLine("--------------------------------");
-            Console.WriteLine("Main Menu");
 
+            Console.WriteLine("Main Menu");
             Console.WriteLine(" 1) Journal Management");
             Console.WriteLine(" 2) Blog Management");
             Console.WriteLine(" 3) Author Management");
@@ -23,6 +24,8 @@ namespace TabloidCLI.UserInterfaceManagers
 
             Console.Write("> ");
             string choice = Console.ReadLine();
+            Console.WriteLine();
+
             switch (choice)
             {
                 case "1": throw new NotImplementedException();

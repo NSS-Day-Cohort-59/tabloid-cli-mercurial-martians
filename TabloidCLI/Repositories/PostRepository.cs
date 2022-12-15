@@ -11,7 +11,43 @@ namespace TabloidCLI.Repositories
 
         public List<Post> GetAll()
         {
-            throw new NotImplementedException();
+           using (SqlConnection connection = Connection) 
+            { 
+                connection.Open(); //this opens the connection to the SQL database
+                using (SqlCommand command = connection.CreateCommand()) // <<--use teh command
+                {
+                    command.CommandText = "SELECT Id, Title, URL FROM Post"; //<<--this query ghets what you need from the Database
+                    using (SqlDataReader reader = command.ExecuteReader()) //<--executes SQL and gets a reader that lets you access teh data
+                    {
+                        List<Post> allPosts = new List<Post>(); //new list of objects from database
+                        while(reader.Read())
+                        {
+                            int idColumnPosition = reader.GetOrdinal("Id");
+                            int idValue = reader.GetInt32(idColumnPosition);
+
+                            // create title position varable, convert to string
+                            int titleColumnPosition = reader.GetOrdinal("Title");
+                            string titleValue = reader.GetString(titleColumnPosition);
+
+                            // create URL position varable, convert to string
+                            int urlColumnPosition = reader.GetOrdinal("URL");
+                            string urlValue = reader.GetString(urlColumnPosition);
+
+                            //assemble new post object for display
+                            Post post = new Post
+                            {
+                                Id = idValue,
+                                Title = titleValue,
+                                Url = urlValue,
+                            };
+                            allPosts.Add(post);
+                        }
+                        reader.Close();
+
+                        return allPosts;
+                    }
+                }
+            }
         }
 
         public Post Get(int id)

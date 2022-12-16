@@ -4,7 +4,7 @@ namespace TabloidCLI.UserInterfaceManagers
 {
     public class MainMenuManager : IUserInterfaceManager
     {
-        private const string CONNECTION_STRING = 
+        private const string CONNECTION_STRING =
             @"Data Source=localhost\SQLEXPRESS;Database=TabloidCLI;Integrated Security=True";
 
         public IUserInterfaceManager Execute()
@@ -25,12 +25,13 @@ namespace TabloidCLI.UserInterfaceManagers
             string choice = Console.ReadLine();
             switch (choice)
             {
-                case "1": throw new NotImplementedException();
+                case "1": return new JournalManager(this, CONNECTION_STRING);
                 case "2": return new BlogManager(this, CONNECTION_STRING);
                 case "3": return new AuthorManager(this, CONNECTION_STRING);
                 case "4": throw new NotImplementedException();
                 case "5": return new TagManager(this, CONNECTION_STRING);
                 case "6": return new SearchManager(this, CONNECTION_STRING);
+                case "7": return new JournalManager(this, CONNECTION_STRING);
                 case "0":
                     Console.WriteLine("Good bye");
                     return null;

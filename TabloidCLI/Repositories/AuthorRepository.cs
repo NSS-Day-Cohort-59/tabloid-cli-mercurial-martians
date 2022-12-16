@@ -56,7 +56,7 @@ namespace TabloidCLI
                                                             FROM Author a 
                                                             LEFT JOIN AuthorTag at on a.Id = at.AuthorId
                                                             LEFT JOIN Tag t on t.Id = at.TagId
-                                                            WHERE a.id = @id"
+                                                            WHERE a.id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     Author author = null;
@@ -118,11 +118,10 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE Author 
-                                           SET FirstName = @firstName,
-                                               LastName = @lastName,
-                                               bio = @bio
-                                         WHERE id = @id";
-
+                                                            SET FirstName = @firstName,
+                                                                    LastName = @lastName,
+                                                                    bio = @bio
+                                                            WHERE id = @id";
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", author.LastName);
                     cmd.Parameters.AddWithValue("@bio", author.Bio);

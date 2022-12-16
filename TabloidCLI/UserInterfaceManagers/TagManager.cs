@@ -21,6 +21,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
         public IUserInterfaceManager Execute()
         {
+            Console.WriteLine();
             Console.WriteLine("Tag Menu »");
             Console.WriteLine(" 1) List Tags");
             Console.WriteLine(" 2) Add Tag");
@@ -49,7 +50,6 @@ namespace TabloidCLI.UserInterfaceManagers
                     return _parentUI;
                 default:
                     Console.WriteLine("Invalid option, try again please!!");
-                    Console.WriteLine();
                     return this;
             }
         }
@@ -66,12 +66,26 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"#{t.Id}: {t.Name}");
             }
-            Console.WriteLine();
         }
 
         private void Add()
         {
-            throw new NotImplementedException();
+            Console.WriteLine();
+            Console.Write("Tag name: ");
+            string name = Console.ReadLine();
+
+            Tag tagNew = new Tag()
+                     {
+                         Name = name
+                     };
+
+            _tagRepository.Insert(tagNew);
+
+            Console.WriteLine();
+            Console.WriteLine($"{tagNew.Name} with ID of {tagNew.Id} has been added!!");
+            Console.WriteLine("================================================");
+            Console.Write("Press any key to continue");
+            Console.ReadKey();
         }
 
         private void Edit()
@@ -86,9 +100,8 @@ namespace TabloidCLI.UserInterfaceManagers
             {
                 Console.WriteLine($"#{t.Id}: {t.Name}");
             }
-            Console.WriteLine();
 
-            Console.Write("Which tag would you like to update? ");
+            Console.Write("Select tag # you'd like to update:  ");
             int selectedTagId = int.Parse(Console.ReadLine());
             Tag selectedTag = tagOptions.FirstOrDefault(t => t.Id == selectedTagId);
 
@@ -98,14 +111,56 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _tagRepository.Update(selectedTag);
 
-            Console.WriteLine("Tag has been successfully updated!");
+            Console.WriteLine("Tag has been successfully updated!!");
+            Console.WriteLine("=====================================");
             Console.Write("Press any key to continue");
             Console.ReadKey();
         }
 
         private void Remove()
         {
-            throw new NotImplementedException();
+            List<Tag> tagsAvailable = _tagRepository.GetAll();
+
+            Console.WriteLine();
+            Console.WriteLine($"Tags");
+            Console.WriteLine($"----------------------");
+
+            foreach (Tag t in tagsAvailable)
+            {
+                Console.WriteLine($"{t.Id}: {t.Name}");
+            }
+
+            Console.WriteLine();
+            Console.Write("Select tag # you'd like to delete:  ");
+            int tagIdSelected = int.Parse(Console.ReadLine());
+            Console.WriteLine();
+
+            _tagRepository.Delete(tagIdSelected);
+
+            Console.WriteLine("Tag has been successfully been deleted!!");
+            Console.WriteLine("==============================================");
+            Console.Write("Press any key to continue");
+            Console.ReadKey();
+
+            //while (true)
+            //    {
+            //        try
+            //        {
+
+            //            Console.WriteLine();
+            //            Console.Write("Select an option > ");
+
+            //            string input = Console.ReadLine();
+            //            int index = int.Parse(input) - 1;
+            //            return options[index];
+            //        }
+            //        catch (Exception)
+            //        {
+
+            //            continue;
+            //        }
+            //    }
+
         }
     }
 }

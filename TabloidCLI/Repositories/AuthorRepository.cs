@@ -18,10 +18,10 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"SELECT id,
-                                               FirstName,
-                                               LastName,
-                                               Bio
-                                          FROM Author";
+                                                            FirstName,
+                                                            LastName,
+                                                            Bio
+                                                            FROM Author";
 
                     List<Author> authors = new List<Author>();
 
@@ -52,17 +52,11 @@ namespace TabloidCLI
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT a.Id AS AuthorId,
-                                               a.FirstName,
-                                               a.LastName,
-                                               a.Bio,
-                                               t.Id AS TagId,
-                                               t.Name
-                                          FROM Author a 
-                                               LEFT JOIN AuthorTag at on a.Id = at.AuthorId
-                                               LEFT JOIN Tag t on t.Id = at.TagId
-                                         WHERE a.id = @id";
-
+                    cmd.CommandText = @"SELECT a.Id AS AuthorId, a.FirstName, a.LastName, a.Bio, t.Id AS TagId, t.Name
+                                                            FROM Author a 
+                                                            LEFT JOIN AuthorTag at on a.Id = at.AuthorId
+                                                            LEFT JOIN Tag t on t.Id = at.TagId
+                                                            WHERE a.id = @id";
                     cmd.Parameters.AddWithValue("@id", id);
 
                     Author author = null;
@@ -124,11 +118,10 @@ namespace TabloidCLI
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"UPDATE Author 
-                                           SET FirstName = @firstName,
-                                               LastName = @lastName,
-                                               bio = @bio
-                                         WHERE id = @id";
-
+                                                            SET FirstName = @firstName,
+                                                                    LastName = @lastName,
+                                                                    bio = @bio
+                                                            WHERE id = @id";
                     cmd.Parameters.AddWithValue("@firstName", author.FirstName);
                     cmd.Parameters.AddWithValue("@lastName", author.LastName);
                     cmd.Parameters.AddWithValue("@bio", author.Bio);

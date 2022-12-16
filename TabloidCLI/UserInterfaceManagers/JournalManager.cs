@@ -23,6 +23,7 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) Add Journal Entry");
             Console.WriteLine(" 2) Show All Entries");
+          //Console.WriteLine(" 3) Update Entry");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -35,9 +36,9 @@ namespace TabloidCLI.UserInterfaceManagers
                 case "2":
                     List();
                     return this;
-                case "3":
+               /* case "3":
                     Edit();
-                    return this;
+                    return this; */
                 case "0":
                     return _parentUI;
                 default:
@@ -110,13 +111,13 @@ namespace TabloidCLI.UserInterfaceManagers
             }
 
             Console.WriteLine();
-            Console.Write("Edit Title (blank to leave unchanged: ");
+            Console.Write("Edit Title (blank to leave unchanged): ");
             string title = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(title))
             {
                 journalToEdit.Title = title;
             }
-            Console.Write("Edit entry (blank to leave unchanged: ");
+            Console.Write("Edit entry (blank to leave unchanged): ");
             string content = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(content))
             {

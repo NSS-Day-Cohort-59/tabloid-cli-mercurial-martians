@@ -100,8 +100,7 @@ namespace TabloidCLI.UserInterfaceManagers
 
             _journalRepository.Insert(journal);
         }
-
-        //Edit error the method or error is not implemented line 107
+// Edit function does not update
         public void Edit()
         {
             Journal journalToEdit = Choose("Which entry would you like to edit?");

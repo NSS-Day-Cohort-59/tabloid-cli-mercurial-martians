@@ -23,7 +23,6 @@ namespace TabloidCLI.UserInterfaceManagers
             Console.WriteLine("Journal Menu");
             Console.WriteLine(" 1) Add Journal Entry");
             Console.WriteLine(" 2) Show All Entries");
-            Console.WriteLine(" 3) Edit Entry");
             Console.WriteLine(" 0) Go Back");
 
             Console.Write("> ");
@@ -101,6 +100,7 @@ namespace TabloidCLI.UserInterfaceManagers
             _journalRepository.Insert(journal);
         }
 
+        //Edit error the method or error is not implemented line 107
         public void Edit()
         {
             Journal journalToEdit = Choose("Which entry would you like to edit?");
